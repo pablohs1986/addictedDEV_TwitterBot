@@ -4,7 +4,8 @@
   "description": "Addicted Dev - Twitter Bot",
   "main": "bot.js",
   "dependencies": {
-    "twit": "^2.2.11"
+    "twit": "^2.2.11",
+    "twitter": "^1.7.1"
   },
   "devDependencies": {},
   "scripts": {
