@@ -6,22 +6,25 @@ var config = require('./config.js');
 var T = new Twit(config);
 
 // Post
-var addDevStatuses = [
-    "#CleanCode for live.",
-    "I'm a #PragmaticProgrammer",
-    "I love #code",
-    "I need #code",
-    "I'm addicted to #code",
-    "I love #Java",
-    "I love #JavaScript",
-    "I love #Python",
-    "I love #SQL",
-    "I love #Angular",
-    "#100DaysOfCode challenge??? I want a #365DaysOfCode challenge!"
-];
+function randomStatus(){
+    var addDevStatuses = [
+        "#CleanCode for live.",
+        "I'm a #PragmaticProgrammer",
+        "I love #code",
+        "I need #code",
+        "I'm addicted to #code",
+        "I love #Java",
+        "I love #JavaScript",
+        "I love #Python",
+        "I love #SQL",
+        "I love #Angular",
+        "#100DaysOfCode challenge??? I want a #365DaysOfCode challenge!"
+    ];
 
-var randomIndex = Math.floor(Math.random()*addDevStatuses.length);
-console.log(randomIndex);
+    var randomIndex = Math.floor(Math.random()*addDevStatuses.length);
+    var status = addDevStatuses[randomIndex];
+    return status;
+}
 
 function tweetIt(text){
     var tweet = {
@@ -41,4 +44,5 @@ function tweetIt(text){
     }
 }
 
-setInterval(tweetIt(addDevStatuses[randomIndex]), 1000*20);
+tweetIt(randomStatus());
+setInterval(tweetIt, 1000*20, randomStatus());
