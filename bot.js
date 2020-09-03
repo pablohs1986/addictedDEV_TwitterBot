@@ -146,6 +146,5 @@ function retweetHashtags(hashtag){
 }
 
 retweetHashtags(returnRandomElementFromArray(hashtags));
-// setInterval(retweetHashtags, 1000*60*10);
-setInterval(retweetHashtags, 60000, returnRandomElementFromArray(hashtags));
+setInterval(retweetHashtags, 1000*60*10, returnRandomElementFromArray(hashtags));
 
