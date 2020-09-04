@@ -65,19 +65,9 @@ let hashtags = [
     '#StackOverFlow', '#angular', '#Angular', '#VSCode', '#vscode', '#Netbeans', '#netbeans', '#Oracle', '#oracle', '#dev', '#Dev', '#developer', '#Developer', '#Development', '#development', '#sql', '#SQL'
 ]
 
-// function randomStatus(){
-//     return status = addDevStatuses[Math.floor(Math.random()*addDevStatuses.length)];
-// }
 
-function returnRandomElementFromArray(array){
-    return status = array[Math.floor(Math.random()*array.length)];
-}
 
-function onlyUniqueTweets(value, index, self){
-    return self.indexOf(value) === index;
-}
-
-// Post every 2 hours
+// Post
 function tweetIt(text){
     var params = {
         status: text
@@ -94,7 +84,19 @@ function tweetIt(text){
 }
 
 tweetIt(returnRandomElementFromArray(addDevStatuses));
-setInterval(tweetIt, 1000*60*120, returnRandomElementFromArray(addDevStatuses));
+setInterval(tweetIt, 1000*60*60, returnRandomElementFromArray(addDevStatuses));
+
+// Post master #100DOC progress
+
+function master100DocProgress(){
+    var progress = 9
+    return "My beloved master, @pablohs1986, is on the day " + progress + " of #100DaysOfCode challenge!!!"
+    progress++;
+}
+
+tweetIt(master100DocProgress);
+setInterval(tweetIt, 1000 * 60 * 60 * 24, master100DocProgress);
+
 
 // Retweet hashtags
 function retweetHashtags(hashtag){
@@ -146,5 +148,13 @@ function retweetHashtags(hashtag){
 }
 
 retweetHashtags(returnRandomElementFromArray(hashtags));
-setInterval(retweetHashtags, 1000*60*10, returnRandomElementFromArray(hashtags));
+setInterval(retweetHashtags, 1000*60*15, returnRandomElementFromArray(hashtags));
 
+// Auxiliar functions
+function returnRandomElementFromArray(array){
+    return status = array[Math.floor(Math.random()*array.length)];
+}
+
+function onlyUniqueTweets(value, index, self){
+    return self.indexOf(value) === index;
+}
