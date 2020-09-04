@@ -91,7 +91,7 @@ setInterval(tweetIt, 1000*60*60, returnRandomElementFromArray(addDevStatuses));
 var initialProgress = 8;
 
 function master100DocProgress(){
-    progress++
+    initialProgress++
     var text = "My beloved master, @pablohs1986, is on the day " + initialProgress + " of #100DaysOfCode challenge!!!"
     return text;
 }
