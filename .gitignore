@@ -1,2 +1,4 @@
 keys.txt
 config.js
+config.env
+config/
