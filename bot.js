@@ -6,7 +6,6 @@ var config = require('./config/config');
 var T = new Twit(config);
 
 // Data
-/*TODO: AÑADIR MÁS FRASES*/
 var addDevStatuses = require('./data/statuses');
 let hashtags = require('./data/hashtags');
 
@@ -37,12 +36,13 @@ tweetRandomStatus();
 setInterval(tweetRandomStatus, 1000*60*5);
 
 // Post master #100DOC progress
-var initialMasterProgress = 9; //TODO: revisar, intentar tomar de referencia una fecha...
-
 function tweetMaster100DocProgress(){
     console.log("Triying to post the master's progress...");
-    initialMasterProgress++
-    var masterProgress = "My beloved master, @pablohs1986, is on the day " + initialMasterProgress + " of #100DaysOfCode challenge!!!"
+    var startDate =  new Date('2020-08-27');
+    var actualDate = new Date();
+    var currentChallengeDay = Math.ceil(Math.abs(actualDate - startDate) / (1000 * 60 * 60 * 24)); 
+
+    var masterProgress = "My beloved master, @pablohs1986, is on the day " + currentChallengeDay + " of #100DaysOfCode challenge!!!"
     tweetIt(masterProgress);
 }
 
