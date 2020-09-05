@@ -86,32 +86,34 @@ function tweetIt(text){
 }
 
 // Post random element from Statuses array
-tweetIt(returnRandomElementFromArray(addDevStatuses));
-// setInterval(tweetIt, 1000*60*60, returnRandomElementFromArray(addDevStatuses));
-// setInterval(tweetIt, 1000*60, returnRandomElementFromArray(addDevStatuses));
+function tweetRandomStatus(){
+    console.log('Triying to post random Status...')
+    var randomStatus = returnRandomElementFromArray(addDevStatuses);
+    tweetIt(randomStatus);
+}
 
-var status = setInterval(returnRandomElementFromArray, 1000, addDevStatuses);
-setInterval(tweetIt, 1000*30, status);
-
+tweetRandomStatus();
+setInterval(tweetRandomStatus, 1000*30);
 
 // Post master #100DOC progress
 var initialProgress = 9;
 
-function master100DocProgress(){
+function tweetMaster100DocProgress(){
     console.log("Triying to post the master's progress...");
     initialProgress++
-    var text = "My beloved master, @pablohs1986, is on the day " + initialProgress + " of #100DaysOfCode challenge!!!"
-    return text;
+    var progress = "My beloved master, @pablohs1986, is on the day " + initialProgress + " of #100DaysOfCode challenge!!!"
+    tweetIt(progress);
 }
 
-tweetIt(master100DocProgress());
-setInterval(tweetIt, 1000 * 60 * 60 * 24, master100DocProgress);
-
+tweetIt(tweetMaster100DocProgress());
+setInterval(tweetMaster100DocProgress, 1000 * 60 * 60 * 24);
 
 // Retweet hashtags
-function retweetHashtags(hashtag){
+function retweetRandomHashtag(){
+    console.log('Triying to retweet Hashtags...')
+    var randomHashtag = returnRandomElementFromArray(hashtags);
     var params = {
-        q: hashtag + ' ',
+        q: randomHashtag + ' ',
         result_type: 'mixed',
         count: '5'
     }
@@ -144,10 +146,10 @@ function retweetHashtags(hashtag){
             for (let tweetID of tweetIDList) {
                 T.post('statuses/retweet/:id', {id : tweetID}, function(err_rt, data_rt, response_rt){
                     if(!err_rt){
-                        console.log("\n\nRetweeted! ID - " + tweetID  + "| HASHTAG - " + hashtag);
+                        console.log("\n\nRetweeted! ID - " + tweetID  + "| HASHTAG - " + randomHashtag);
                     }
                     else {
-                        console.log("\nShit retweeting!! Duplication maybe... " + tweetID + "| HASHTAG - " + hashtag);
+                        console.log("\nShit retweeting!! Duplication maybe... " + tweetID + "| HASHTAG - " + randomHashtag);
                         console.log("Error: " + err_rt);
                     }
                 })
@@ -157,8 +159,8 @@ function retweetHashtags(hashtag){
     })
 }
 
-retweetHashtags(returnRandomElementFromArray(hashtags));
-setInterval(retweetHashtags, 1000*60*15, returnRandomElementFromArray(hashtags));
+retweetRandomHashtag();
+setInterval(retweetRandomHashtag, 1000*60*15);
 
 // Auxiliar functions
 function returnRandomElementFromArray(array){
