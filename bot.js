@@ -62,8 +62,11 @@ var addDevStatuses = [
 ];
 
 let hashtags = [
-    '#java', '#Java', '#js', '#javascript', '#JavaScript', '#python', '#Python', '#nodejs', '#nodeJS', '#100DaysOfCode', '#100daysofcode', '#100DOC', '#100doc', '#stackoverflow', 
-    '#StackOverFlow', '#angular', '#Angular', '#VSCode', '#vscode', '#Netbeans', '#netbeans', '#Oracle', '#oracle', '#dev', '#Dev', '#developer', '#Developer', '#Development', '#development', '#sql', '#SQL'
+    '#java', '#Java', '#js', '#javascript', '#JavaScript', '#python', '#Python', 
+    '#nodejs', '#nodeJS', '#100DaysOfCode', '#100daysofcode', '#100DOC', '#100doc', 
+    '#stackoverflow', '#StackOverFlow', '#angular', '#Angular', '#VSCode', '#vscode', 
+    '#Netbeans', '#netbeans', '#developer', '#Developer', '#Development', '#development', 
+    '#sql', '#SQL'
 ]
 
 // Post function
@@ -85,7 +88,11 @@ function tweetIt(text){
 // Post random element from Statuses array
 tweetIt(returnRandomElementFromArray(addDevStatuses));
 // setInterval(tweetIt, 1000*60*60, returnRandomElementFromArray(addDevStatuses));
-setInterval(tweetIt, 1000*60, returnRandomElementFromArray(addDevStatuses));
+// setInterval(tweetIt, 1000*60, returnRandomElementFromArray(addDevStatuses));
+
+var statusesIndex = setInterval(returnRandomElementFromArray, 1000, addDevStatuses);
+setInterval(tweetIt, 1000*30, addDevStatuses(statusesIndex));
+
 
 // Post master #100DOC progress
 var initialProgress = 9;
