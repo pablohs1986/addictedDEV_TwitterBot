@@ -85,7 +85,7 @@ function tweetIt(text){
 // Post random element from Statuses array
 tweetIt(returnRandomElementFromArray(addDevStatuses));
 // setInterval(tweetIt, 1000*60*60, returnRandomElementFromArray(addDevStatuses));
-setInterval(tweetIt, 6000, returnRandomElementFromArray(addDevStatuses));
+setInterval(tweetIt, 1000*60, returnRandomElementFromArray(addDevStatuses));
 
 // Post master #100DOC progress
 var initialProgress = 9;
@@ -102,56 +102,56 @@ setInterval(tweetIt, 1000 * 60 * 60 * 24, master100DocProgress);
 
 
 // Retweet hashtags
-// function retweetHashtags(hashtag){
-//     var params = {
-//         q: hashtag + ' ',
-//         result_type: 'mixed',
-//         count: '5'
-//     }
+function retweetHashtags(hashtag){
+    var params = {
+        q: hashtag + ' ',
+        result_type: 'mixed',
+        count: '5'
+    }
 
-//     T.get('search/tweets', params, function(err_search, data_search, response_search){
-//         let tweets = data_search.statuses;
+    T.get('search/tweets', params, function(err_search, data_search, response_search){
+        let tweets = data_search.statuses;
        
-//         if(err_search){
-//             console.log("Shit searching!!");
-//             console.log(err_search);
-//         }else{
-//             var tweetIDList = [];
+        if(err_search){
+            console.log("Shit searching!!");
+            console.log(err_search);
+        }else{
+            var tweetIDList = [];
             
-//             for(let tweet of tweets){
-//                 if(tweet.text.startsWith("RT @")){
-//                     if(tweet.retweeted_status){
-//                         tweetIDList.push(tweet.retweeted_status.id_str);
-//                     }else{
-//                         tweetIDList.push(tweet.id_str);
-//                     }
-//                 }else{
-//                     tweetIDList.push(tweet.id_str);
-//                 }
-//             }
+            for(let tweet of tweets){
+                if(tweet.text.startsWith("RT @")){
+                    if(tweet.retweeted_status){
+                        tweetIDList.push(tweet.retweeted_status.id_str);
+                    }else{
+                        tweetIDList.push(tweet.id_str);
+                    }
+                }else{
+                    tweetIDList.push(tweet.id_str);
+                }
+            }
 
-//             tweetIDList = tweetIDList.filter(onlyUniqueTweets);
+            tweetIDList = tweetIDList.filter(onlyUniqueTweets);
 
-//             console.log("TweetIDList = \n" + tweetIDList);
+            console.log("TweetIDList = \n" + tweetIDList);
 
-//             for (let tweetID of tweetIDList) {
-//                 T.post('statuses/retweet/:id', {id : tweetID}, function(err_rt, data_rt, response_rt){
-//                     if(!err_rt){
-//                         console.log("\n\nRetweeted! ID - " + tweetID);
-//                     }
-//                     else {
-//                         console.log("\nShit retweeting!! Duplication maybe... " + tweetID + "| HASHTAG - " + hashtag);
-//                         console.log("Error: " + err_rt);
-//                     }
-//                 })
-//             }
-//             console.log("It worked! Hashtags retweeted!!!");
-//         }
-//     })
-// }
+            for (let tweetID of tweetIDList) {
+                T.post('statuses/retweet/:id', {id : tweetID}, function(err_rt, data_rt, response_rt){
+                    if(!err_rt){
+                        console.log("\n\nRetweeted! ID - " + tweetID);
+                    }
+                    else {
+                        console.log("\nShit retweeting!! Duplication maybe... " + tweetID + "| HASHTAG - " + hashtag);
+                        console.log("Error: " + err_rt);
+                    }
+                })
+            }
+            console.log("It worked! Hashtags retweeted!!!");
+        }
+    })
+}
 
-// retweetHashtags(returnRandomElementFromArray(hashtags));
-// setInterval(retweetHashtags, 1000*60*15, returnRandomElementFromArray(hashtags));
+retweetHashtags(returnRandomElementFromArray(hashtags));
+setInterval(retweetHashtags, 1000*60*15, returnRandomElementFromArray(hashtags));
 
 // Auxiliar functions
 function returnRandomElementFromArray(array){
