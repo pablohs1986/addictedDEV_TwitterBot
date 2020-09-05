@@ -5,6 +5,103 @@ var Twit = require('twit');
 var config = require('./config/config');
 var T = new Twit(config);
 
+// Post function
+function tweetIt(text){
+    var params = {
+        status: text
+    }
+
+    T.post('statuses/update', params, function (err, data){
+        if(err){
+            console.log("Shit!!");
+            console.log(err);
+        }else{
+            console.log("It worked! Tweeting!!");
+        }
+    })
+}
+
+// Post random element from Statuses array
+tweetIt(returnRandomElementFromArray(addDevStatuses));
+// setInterval(tweetIt, 1000*60*60, returnRandomElementFromArray(addDevStatuses));
+setInterval(tweetIt, 6000, returnRandomElementFromArray(addDevStatuses));
+
+// Post master #100DOC progress
+var initialProgress = 9;
+
+function master100DocProgress(){
+    console.log("Triying to post the master's progress...");
+    initialProgress++
+    var text = "My beloved master, @pablohs1986, is on the day " + initialProgress + " of #100DaysOfCode challenge!!!"
+    return text;
+}
+
+tweetIt(master100DocProgress());
+setInterval(tweetIt, 1000 * 60 * 60 * 24, master100DocProgress);
+
+
+// Retweet hashtags
+function retweetHashtags(hashtag){
+    var params = {
+        q: hashtag + ' ',
+        result_type: 'mixed',
+        count: '5'
+    }
+
+    T.get('search/tweets', params, function(err_search, data_search, response_search){
+        let tweets = data_search.statuses;
+       
+        if(err_search){
+            console.log("Shit searching!!");
+            console.log(err_search);
+        }else{
+            var tweetIDList = [];
+            
+            for(let tweet of tweets){
+                if(tweet.text.startsWith("RT @")){
+                    if(tweet.retweeted_status){
+                        tweetIDList.push(tweet.retweeted_status.id_str);
+                    }else{
+                        tweetIDList.push(tweet.id_str);
+                    }
+                }else{
+                    tweetIDList.push(tweet.id_str);
+                }
+            }
+
+            tweetIDList = tweetIDList.filter(onlyUniqueTweets);
+
+            console.log("TweetIDList = \n" + tweetIDList);
+
+            for (let tweetID of tweetIDList) {
+                T.post('statuses/retweet/:id', {id : tweetID}, function(err_rt, data_rt, response_rt){
+                    if(!err_rt){
+                        console.log("\n\nRetweeted! ID - " + tweetID);
+                    }
+                    else {
+                        console.log("\nShit retweeting!! Duplication maybe... " + tweetID + "| HASHTAG - " + hashtag);
+                        console.log("Error: " + err_rt);
+                    }
+                })
+            }
+            console.log("It worked! Hashtags retweeted!!!");
+        }
+    })
+}
+
+// retweetHashtags(returnRandomElementFromArray(hashtags));
+// setInterval(retweetHashtags, 1000*60*15, returnRandomElementFromArray(hashtags));
+
+// Auxiliar functions
+function returnRandomElementFromArray(array){
+    return status = array[Math.floor(Math.random()*array.length)];
+}
+
+function onlyUniqueTweets(value, index, self){
+    return self.indexOf(value) === index;
+}
+
+// Data
 var addDevStatuses = [
     "#CleanCode for live. #dev #code #botsPower",
     "I'm a #PragmaticProgrammer. #dev #code #botsPower",
@@ -64,99 +161,3 @@ let hashtags = [
     '#java', '#Java', '#js', '#javascript', '#JavaScript', '#python', '#Python', '#nodejs', '#nodeJS', '#100DaysOfCode', '#100daysofcode', '#100DOC', '#100doc', '#stackoverflow', 
     '#StackOverFlow', '#angular', '#Angular', '#VSCode', '#vscode', '#Netbeans', '#netbeans', '#Oracle', '#oracle', '#dev', '#Dev', '#developer', '#Developer', '#Development', '#development', '#sql', '#SQL'
 ]
-
-
-
-// Post
-function tweetIt(text){
-    var params = {
-        status: text
-    }
-
-    T.post('statuses/update', params, function (err, data){
-        if(err){
-            console.log("Shit!!");
-            console.log(err);
-        }else{
-            console.log("It worked! Tweeting!!");
-        }
-    })
-}
-
-tweetIt(returnRandomElementFromArray(addDevStatuses));
-setInterval(tweetIt, 1000*60*60, returnRandomElementFromArray(addDevStatuses));
-
-// Post master #100DOC progress
-
-var initialProgress = 8;
-
-function master100DocProgress(){
-    initialProgress++
-    var text = "My beloved master, @pablohs1986, is on the day " + initialProgress + " of #100DaysOfCode challenge!!!"
-    return text;
-}
-
-tweetIt(master100DocProgress());
-setInterval(tweetIt, 1000 * 60 * 60 * 24, master100DocProgress);
-
-
-// Retweet hashtags
-function retweetHashtags(hashtag){
-    var params = {
-        q: hashtag + ' ',
-        result_type: 'mixed',
-        count: '5'
-    }
-
-    T.get('search/tweets', params, function(err_search, data_search, response_search){
-        let tweets = data_search.statuses;
-       
-        if(err_search){
-            console.log("Shit searching!!");
-            console.log(err_search);
-        }else{
-            var tweetIDList = [];
-            
-            for(let tweet of tweets){
-                if(tweet.text.startsWith("RT @")){
-                    if(tweet.retweeted_status){
-                        tweetIDList.push(tweet.retweeted_status.id_str);
-                    }else{
-                        tweetIDList.push(tweet.id_str);
-                    }
-                }else{
-                    tweetIDList.push(tweet.id_str);
-                }
-            }
-
-            tweetIDList = tweetIDList.filter(onlyUniqueTweets);
-
-            console.log("TweetIDList = \n" + tweetIDList);
-
-            for (let tweetID of tweetIDList) {
-                T.post('statuses/retweet/:id', {id : tweetID}, function(err_rt, data_rt, response_rt){
-                    if(!err_rt){
-                        console.log("\n\nRetweeted! ID - " + tweetID);
-                    }
-                    else {
-                        console.log("\nShit retweeting!! Duplication maybe... " + tweetID + "| HASHTAG - " + hashtag);
-                        console.log("Error: " + err_rt);
-                    }
-                })
-            }
-            console.log("It worked! Hashtags retweeted!!!");
-        }
-    })
-}
-
-retweetHashtags(returnRandomElementFromArray(hashtags));
-setInterval(retweetHashtags, 1000*60*15, returnRandomElementFromArray(hashtags));
-
-// Auxiliar functions
-function returnRandomElementFromArray(array){
-    return status = array[Math.floor(Math.random()*array.length)];
-}
-
-function onlyUniqueTweets(value, index, self){
-    return self.indexOf(value) === index;
-}
