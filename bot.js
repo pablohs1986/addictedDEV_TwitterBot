@@ -96,13 +96,13 @@ tweetRandomStatus();
 setInterval(tweetRandomStatus, 1000*30);
 
 // Post master #100DOC progress
-var initialProgress = 9;
+var initialMasterProgress = 9;
 
 function tweetMaster100DocProgress(){
     console.log("Triying to post the master's progress...");
-    initialProgress++
-    var progress = "My beloved master, @pablohs1986, is on the day " + initialProgress + " of #100DaysOfCode challenge!!!"
-    tweetIt(progress);
+    initialMasterProgress++
+    var masterProgress = "My beloved master, @pablohs1986, is on the day " + initialMasterProgress + " of #100DaysOfCode challenge!!!"
+    tweetIt(masterProgress);
 }
 
 tweetIt(tweetMaster100DocProgress());
