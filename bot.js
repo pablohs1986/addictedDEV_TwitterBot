@@ -110,8 +110,8 @@ setInterval(tweetMaster100DocProgress, 1000 * 60 * 60 * 24);
 
 // Retweet random hashtags
 function retweetRandomHashtag(){
-    console.log('Triying to retweet Hashtags...')
     var randomHashtag = returnRandomElementFromArray(hashtags);
+    console.log('Triying to retweet hastagh ' + randomHashtag);
     var params = {
         q: randomHashtag + ' ',
         result_type: 'mixed',
