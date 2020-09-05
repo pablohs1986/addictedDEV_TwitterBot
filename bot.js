@@ -90,8 +90,8 @@ tweetIt(returnRandomElementFromArray(addDevStatuses));
 // setInterval(tweetIt, 1000*60*60, returnRandomElementFromArray(addDevStatuses));
 // setInterval(tweetIt, 1000*60, returnRandomElementFromArray(addDevStatuses));
 
-var statusesIndex = setInterval(returnRandomElementFromArray, 1000, addDevStatuses);
-setInterval(tweetIt, 1000*30, addDevStatuses[statusesIndex]);
+var status = setInterval(returnRandomElementFromArray, 1000, addDevStatuses);
+setInterval(tweetIt, 1000*30, status);
 
 
 // Post master #100DOC progress
