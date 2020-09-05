@@ -137,7 +137,7 @@ function retweetHashtags(hashtag){
             for (let tweetID of tweetIDList) {
                 T.post('statuses/retweet/:id', {id : tweetID}, function(err_rt, data_rt, response_rt){
                     if(!err_rt){
-                        console.log("\n\nRetweeted! ID - " + tweetID);
+                        console.log("\n\nRetweeted! ID - " + tweetID  + "| HASHTAG - " + hashtag);
                     }
                     else {
                         console.log("\nShit retweeting!! Duplication maybe... " + tweetID + "| HASHTAG - " + hashtag);
