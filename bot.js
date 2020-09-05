@@ -39,9 +39,6 @@ function tweetMasters100DocProgress(){
     tweetIt(masterProgress);
 }
 
-tweetMasters100DocProgress();
-setInterval(tweetMasters100DocProgress, 1000 * 60 * 60 * 24);
-
 // Post function
 function tweetIt(text){
     var params = {
