@@ -1,6 +1,5 @@
 // Setup
 console.log('The bot is starting');
-
 var Twit = require('twit');
 var config = require('./config/config');
 var T = new Twit(config);
@@ -33,7 +32,7 @@ tweetMastersProgressAt18.schedule();
 
 function tweetMasters100DocProgress(){
     console.log("Triying to post the master's progress...");
-    var startDate =  new Date('2020-08-27');
+    const startDate =  new Date('2020-08-27');
     var actualDate = new Date();
     var currentChallengeDay = Math.ceil(Math.abs(actualDate - startDate) / (1000 * 60 * 60 * 24)); 
     var masterProgress = "My beloved master, @pablohs1986, is on the day " + currentChallengeDay + " of #100DaysOfCode challenge!!! 0x1F9BE"
