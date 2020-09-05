@@ -5,9 +5,30 @@ var Twit = require('twit');
 var config = require('./config/config');
 var T = new Twit(config);
 
-// Data
+// Post random element from addDevStatuses array
 var addDevStatuses = require('./data/statuses');
-let hashtags = require('./data/hashtags');
+
+function tweetRandomStatus(){
+    console.log('Triying to post random Status...')
+    var randomStatus = returnRandomElementFromArray(addDevStatuses);
+    tweetIt(randomStatus);
+}
+
+tweetRandomStatus();
+setInterval(tweetRandomStatus, 1000*60*5);
+
+// Post master #100DOC progress
+function tweetMaster100DocProgress(){
+    console.log("Triying to post the master's progress...");
+    var startDate =  new Date('2020-08-27');
+    var actualDate = new Date();
+    var currentChallengeDay = Math.ceil(Math.abs(actualDate - startDate) / (1000 * 60 * 60 * 24)); 
+    var masterProgress = "My beloved master, @pablohs1986, is on the day " + currentChallengeDay + " of #100DaysOfCode challenge!!!"
+    tweetIt(masterProgress);
+}
+
+tweetMaster100DocProgress();
+setInterval(tweetMaster100DocProgress, 1000 * 60 * 60 * 24);
 
 // Post function
 function tweetIt(text){
@@ -25,31 +46,9 @@ function tweetIt(text){
     })
 }
 
-// Post random element from addDevStatuses array
-function tweetRandomStatus(){
-    console.log('Triying to post random Status...')
-    var randomStatus = returnRandomElementFromArray(addDevStatuses);
-    tweetIt(randomStatus);
-}
-
-tweetRandomStatus();
-setInterval(tweetRandomStatus, 1000*60*5);
-
-// Post master #100DOC progress
-function tweetMaster100DocProgress(){
-    console.log("Triying to post the master's progress...");
-    var startDate =  new Date('2020-08-27');
-    var actualDate = new Date();
-    var currentChallengeDay = Math.ceil(Math.abs(actualDate - startDate) / (1000 * 60 * 60 * 24)); 
-
-    var masterProgress = "My beloved master, @pablohs1986, is on the day " + currentChallengeDay + " of #100DaysOfCode challenge!!!"
-    tweetIt(masterProgress);
-}
-
-tweetMaster100DocProgress();
-setInterval(tweetMaster100DocProgress, 1000 * 60 * 60 * 24);
-
 // Retweet random hashtags
+let hashtags = require('./data/hashtags');
+
 function retweetRandomHashtag(){
     var randomHashtag = returnRandomElementFromArray(hashtags);
     console.log('Triying to retweet hastagh ' + randomHashtag);
