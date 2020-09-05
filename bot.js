@@ -105,7 +105,7 @@ function tweetMaster100DocProgress(){
     tweetIt(masterProgress);
 }
 
-tweetMaster100DocProgress()
+tweetMaster100DocProgress();
 setInterval(tweetMaster100DocProgress, 1000 * 60 * 60 * 24);
 
 // Retweet hashtags
