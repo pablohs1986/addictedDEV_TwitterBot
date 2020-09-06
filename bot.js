@@ -1,14 +1,43 @@
 // Setup
 console.log('The bot is starting');
-
 var Twit = require('twit');
 var config = require('./config/config');
 var T = new Twit(config);
 
-// Data
-/*TODO: AÑADIR MÁS FRASES*/
+// Post random element from addDevStatuses array
 var addDevStatuses = require('./data/statuses');
-let hashtags = require('./data/hashtags');
+
+function tweetRandomStatus(){
+    console.log('Triying to post random Status...')
+    var randomStatus = returnRandomElementFromArray(addDevStatuses);
+    tweetIt(randomStatus);
+}
+
+tweetRandomStatus();
+setInterval(tweetRandomStatus, 1000*60*73);
+
+// Post master #100DOC progress every day at 10, 18h
+var schedule = require('node-schedule');
+var tweetMastersProgressAt10 = schedule.scheduleJob('0 10 * * *', function(){
+    console.log('Tweting master progress at 10 AM');
+    tweetMasters100DocProgress();
+    });
+var tweetMastersProgressAt18 = schedule.scheduleJob('0 18 * * *', function(){
+    console.log('Tweting master progress at 10 AM');
+    tweetMasters100DocProgress();
+    });
+
+tweetMastersProgressAt10.schedule();
+tweetMastersProgressAt18.schedule();
+
+function tweetMasters100DocProgress(){
+    console.log("Triying to post the master's progress...");
+    const startDate =  new Date('2020-08-27');
+    var actualDate = new Date();
+    var currentChallengeDay = Math.ceil(Math.abs(actualDate - startDate) / (1000 * 60 * 60 * 24)); 
+    var masterProgress = "My beloved master, @pablohs1986, is on the day " + currentChallengeDay + " of #100DaysOfCode challenge!!! 0x1F9BE"
+    tweetIt(masterProgress);
+}
 
 // Post function
 function tweetIt(text){
@@ -26,30 +55,9 @@ function tweetIt(text){
     })
 }
 
-// Post random element from addDevStatuses array
-function tweetRandomStatus(){
-    console.log('Triying to post random Status...')
-    var randomStatus = returnRandomElementFromArray(addDevStatuses);
-    tweetIt(randomStatus);
-}
-
-tweetRandomStatus();
-setInterval(tweetRandomStatus, 1000*60*5);
-
-// Post master #100DOC progress
-var initialMasterProgress = 9; //TODO: revisar, intentar tomar de referencia una fecha...
-
-function tweetMaster100DocProgress(){
-    console.log("Triying to post the master's progress...");
-    initialMasterProgress++
-    var masterProgress = "My beloved master, @pablohs1986, is on the day " + initialMasterProgress + " of #100DaysOfCode challenge!!!"
-    tweetIt(masterProgress);
-}
-
-tweetMaster100DocProgress();
-setInterval(tweetMaster100DocProgress, 1000 * 60 * 60 * 24);
-
 // Retweet random hashtags
+let hashtags = require('./data/hashtags');
+
 function retweetRandomHashtag(){
     var randomHashtag = returnRandomElementFromArray(hashtags);
     console.log('Triying to retweet hastagh ' + randomHashtag);
@@ -101,7 +109,7 @@ function retweetRandomHashtag(){
 }
 
 retweetRandomHashtag();
-setInterval(retweetRandomHashtag, 1000*60*10);
+setInterval(retweetRandomHashtag, 1000*60*130);
 
 // Auxiliar functions
 function returnRandomElementFromArray(array){
