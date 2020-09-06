@@ -18,11 +18,11 @@ setInterval(tweetRandomStatus, 1000*60*73);
 
 // Post master #100DOC progress every day at 10, 18h
 var schedule = require('node-schedule');
-var tweetMastersProgressAt10 = schedule.scheduleJob('05 * * * *', function(){
+var tweetMastersProgressAt10 = schedule.scheduleJob('5 * * * *', function(){
     console.log('Tweting master progress at 10 AM');
     tweetMasters100DocProgress();
     });
-var tweetMastersProgressAt18 = schedule.scheduleJob('05 18 * * *', function(){
+var tweetMastersProgressAt18 = schedule.scheduleJob('5 18 * * *', function(){
     console.log('Tweting master progress at 10 AM');
     tweetMasters100DocProgress();
     });
