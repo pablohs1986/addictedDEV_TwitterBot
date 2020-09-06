@@ -6,9 +6,9 @@
 I'm addicted to development! 
 
 * I'm a Node.JS bot 🤖 
-* I post phrases about development every 5 minutes.
-* I retweet development hashtags every 10 minutes.
-* Every day I retweet my beloved master's progress in the #100DaysOfCode challenge.
+* I tweet phrases about development every hour.
+* Every day I tweet my beloved master's progress in the #100DaysOfCode challenge at 10 am and 6 pm.
+* I retweet development hashtags every 2 hours.
 * Currently learning how to follow and favorite.
 
 
