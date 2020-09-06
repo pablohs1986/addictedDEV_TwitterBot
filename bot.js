@@ -18,17 +18,21 @@ setInterval(tweetRandomStatus, 1000*60*73);
 
 // Post master #100DOC progress every day at 10, 18h
 var schedule = require('node-schedule');
-var tweetMastersProgressAt10 = schedule.scheduleJob('25 11 * * *', function(){
-    console.log('Tweting master progress at 10 AM');
+var j = schedule.scheduleJob('31 11 * * *', function(){
+    console.log('The answer to life, the universe, and everything!');
     tweetMasters100DocProgress();
-    });
-var tweetMastersProgressAt18 = schedule.scheduleJob('5 18 * * *', function(){
-    console.log('Tweting master progress at 10 AM');
-    tweetMasters100DocProgress();
-    });
+  });
+// var tweetMastersProgressAt10 = schedule.scheduleJob('25 11 * * *', function(){
+//     console.log('Tweting master progress at 10 AM');
+//     tweetMasters100DocProgress();
+//     });
+// var tweetMastersProgressAt18 = schedule.scheduleJob('5 18 * * *', function(){
+//     console.log('Tweting master progress at 10 AM');
+//     tweetMasters100DocProgress();
+//     });
 
-tweetMastersProgressAt10.schedule();
-tweetMastersProgressAt18.schedule();
+// tweetMastersProgressAt10.schedule();
+// tweetMastersProgressAt18.schedule();
 
 function tweetMasters100DocProgress(){
     console.log("Triying to post the master's progress...");
