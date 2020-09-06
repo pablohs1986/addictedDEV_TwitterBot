@@ -17,10 +17,18 @@ tweetRandomStatus();
 setInterval(tweetRandomStatus, 1000*60*73);
 
 // Post master #100DOC progress every day at 10, 18h
-var schedule = require('node-schedule');
-var j = schedule.scheduleJob('33 11 * * *', function(){
-    tweetMasters100DocProgress();
-  });
+var CronJob = require('cron').CronJob;
+
+var job = new CronJob('00 51 11 * * *', function() {
+  console.log('You will see this message every second');
+  tweetMasters100DocProgress();
+}, null, true, 'Europe/Madrid');
+job.start();
+
+// var schedule = require('node-schedule');
+// var j = schedule.scheduleJob('33 11 * * *', function(){
+//     tweetMasters100DocProgress();
+//   });
 // var tweetMastersProgressAt10 = schedule.scheduleJob('25 11 * * *', function(){
 //     console.log('Tweting master progress at 10 AM');
 //     tweetMasters100DocProgress();
