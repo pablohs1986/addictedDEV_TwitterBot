@@ -14,7 +14,7 @@ function tweetRandomStatus(){
 }
 
 tweetRandomStatus();
-setInterval(tweetRandomStatus, 1000*60*5);
+setInterval(tweetRandomStatus, 1000*60*73);
 
 // Post master #100DOC progress every day at 10, 18h
 var schedule = require('node-schedule');
@@ -109,7 +109,7 @@ function retweetRandomHashtag(){
 }
 
 retweetRandomHashtag();
-setInterval(retweetRandomHashtag, 1000*60*10);
+setInterval(retweetRandomHashtag, 1000*60*130);
 
 // Auxiliar functions
 function returnRandomElementFromArray(array){
