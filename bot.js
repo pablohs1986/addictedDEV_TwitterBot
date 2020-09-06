@@ -17,25 +17,25 @@ tweetRandomStatus();
 setInterval(tweetRandomStatus, 1000*60*73);
 
 // Post master #100DOC progress every day at 10, 18h
-var schedule = require('node-schedule');
-var tweetMastersProgressAt10 = schedule.scheduleJob('0 10 * * *', function(){
+var CronJob = require('cron').CronJob;
+var tweetMastersProgressAt10 = new CronJob('00 00 10 * * *', function() {
     console.log('Tweting master progress at 10 AM');
     tweetMasters100DocProgress();
-    });
-var tweetMastersProgressAt18 = schedule.scheduleJob('0 18 * * *', function(){
-    console.log('Tweting master progress at 10 AM');
+    }, null, true, 'Europe/Madrid');
+var tweetMastersProgressAt18 = new CronJob('00 00 18 * * *', function() {
+    console.log('Tweting master progress at 6 PM');
     tweetMasters100DocProgress();
-    });
+    }, null, true, 'Europe/Madrid');
 
-tweetMastersProgressAt10.schedule();
-tweetMastersProgressAt18.schedule();
+tweetMastersProgressAt10.start();
+tweetMastersProgressAt18.start();
 
 function tweetMasters100DocProgress(){
-    console.log("Triying to post the master's progress...");
+    console.log("Tweting the master's progress...");
     const startDate =  new Date('2020-08-27');
     var actualDate = new Date();
     var currentChallengeDay = Math.ceil(Math.abs(actualDate - startDate) / (1000 * 60 * 60 * 24)); 
-    var masterProgress = "My beloved master, @pablohs1986, is on the day " + currentChallengeDay + " of #100DaysOfCode challenge!!! 0x1F9BE"
+    var masterProgress = "My beloved master, @pablohs1986, is on the day " + currentChallengeDay + " of #100DaysOfCode challenge!!! " + String.fromCodePoint(0x1F9BE);
     tweetIt(masterProgress);
 }
 
