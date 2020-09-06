@@ -16,19 +16,14 @@ function tweetRandomStatus(){
 tweetRandomStatus();
 setInterval(tweetRandomStatus, 1000*60*73);
 
-// Post master #100DOC progress every day at 10, 18h
+// Post master #100DOC progress every day at 10
 var CronJob = require('cron').CronJob;
 var tweetMastersProgressAt10 = new CronJob('00 00 10 * * *', function() {
     console.log('Tweting master progress at 10 AM');
     tweetMasters100DocProgress();
     }, null, true, 'Europe/Madrid');
-var tweetMastersProgressAt18 = new CronJob('00 00 18 * * *', function() {
-    console.log('Tweting master progress at 6 PM');
-    tweetMasters100DocProgress();
-    }, null, true, 'Europe/Madrid');
 
 tweetMastersProgressAt10.start();
-tweetMastersProgressAt18.start();
 
 function tweetMasters100DocProgress(){
     console.log("Tweting the master's progress...");
