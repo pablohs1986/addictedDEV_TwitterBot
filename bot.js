@@ -17,7 +17,7 @@ tweetRandomStatus();
 setInterval(tweetRandomStatus, 1000*60*73);
 
 // Post master #100DOC progress every day at 10
-var CronJob = require('cron').CronJob;
+/* var CronJob = require('cron').CronJob;
 var tweetMastersProgressAt10 = new CronJob('00 00 10 * * *', function() {
     console.log('Tweting master progress at 10 AM');
     tweetMasters100DocProgress();
@@ -32,7 +32,7 @@ function tweetMasters100DocProgress(){
     var currentChallengeDay = Math.ceil(Math.abs(actualDate - startDate) / (1000 * 60 * 60 * 24)); 
     var masterProgress = "My beloved master, @pablohs1986, is on the day " + currentChallengeDay + " of #100DaysOfCode challenge!!! " + String.fromCodePoint(0x1F9BE);
     tweetIt(masterProgress);
-}
+} */
 
 // Post function
 function tweetIt(text){
